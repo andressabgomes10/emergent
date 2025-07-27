@@ -44,15 +44,13 @@ const LoginForm = ({ onSuccess }) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-yellow-50 via-amber-50 to-orange-100">
       <div className="glass-card rounded-2xl p-8 w-full max-w-md border border-white/20">
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl mx-auto mb-4 flex items-center justify-center">
-            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364" />
-            </svg>
+          <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl mx-auto mb-4 flex items-center justify-center">
+            <span className="text-white font-bold text-2xl">C</span>
           </div>
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">AtendePro</h1>
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">Cajá Atendimento</h1>
           <p className="text-gray-600">
             {isLogin ? 'Entre na sua conta' : 'Crie sua conta'}
           </p>
@@ -74,7 +72,7 @@ const LoginForm = ({ onSuccess }) => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Digite seu email"
-              className="w-full px-4 py-3 bg-white/50 border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 bg-white/50 border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
               required
             />
           </div>
@@ -88,7 +86,7 @@ const LoginForm = ({ onSuccess }) => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Digite sua senha"
-              className="w-full px-4 py-3 bg-white/50 border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 bg-white/50 border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
               required
             />
           </div>
@@ -105,7 +103,7 @@ const LoginForm = ({ onSuccess }) => {
         <div className="mt-6 text-center">
           <button
             onClick={() => setIsLogin(!isLogin)}
-            className="text-blue-600 hover:text-blue-800 font-medium"
+            className="text-orange-600 hover:text-orange-800 font-medium"
           >
             {isLogin 
               ? 'Não tem conta? Criar conta' 
@@ -115,9 +113,9 @@ const LoginForm = ({ onSuccess }) => {
         </div>
 
         {/* Demo credentials */}
-        <div className="mt-6 p-4 bg-blue-50/50 rounded-xl border border-blue-200/50">
-          <h3 className="text-sm font-semibold text-blue-800 mb-2">Credenciais de Teste:</h3>
-          <p className="text-xs text-blue-600">
+        <div className="mt-6 p-4 bg-orange-50/50 rounded-xl border border-orange-200/50">
+          <h3 className="text-sm font-semibold text-orange-800 mb-2">Credenciais de Teste:</h3>
+          <p className="text-xs text-orange-600">
             Email: admin@atendepro.com<br />
             Senha: admin123
           </p>
