@@ -4,6 +4,7 @@ import { useAuth } from '../contexts/AuthContext';
 
 const Sidebar = () => {
   const [hoveredItem, setHoveredItem] = useState(null);
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const location = useLocation();
   const { signOut, user } = useAuth();
 
