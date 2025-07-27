@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { stats, tickets as ticketService, realtime } from '../lib/supabase';
 
 const Dashboard = () => {
   const statsCards = [
