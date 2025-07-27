@@ -187,8 +187,8 @@ const Dashboard = () => {
             <tbody className="divide-y divide-white/10">
               {recentTickets.map((ticket, index) => (
                 <tr key={index} className="hover:bg-white/10 transition-colors">
-                  <td className="px-6 py-4 text-sm font-semibold text-blue-600">{ticket.id}</td>
-                  <td className="px-6 py-4 text-sm text-gray-800 font-medium">{ticket.client}</td>
+                  <td className="px-6 py-4 text-sm font-semibold text-blue-600">#{ticket.id.slice(0, 8)}</td>
+                  <td className="px-6 py-4 text-sm text-gray-800 font-medium">{ticket.clients?.name || 'Cliente não encontrado'}</td>
                   <td className="px-6 py-4 text-sm text-gray-700">{ticket.subject}</td>
                   <td className="px-6 py-4">
                     <span className={`status-badge priority-${ticket.priority}`}>
@@ -196,11 +196,11 @@ const Dashboard = () => {
                     </span>
                   </td>
                   <td className="px-6 py-4">
-                    <span className={`status-badge status-${ticket.status === 'aberto' ? 'open' : ticket.status === 'andamento' ? 'progress' : 'closed'}`}>
-                      {ticket.status}
+                    <span className={`status-badge status-${ticket.status === 'open' ? 'open' : ticket.status === 'in_progress' ? 'progress' : 'closed'}`}>
+                      {ticket.status === 'open' ? 'aberto' : ticket.status === 'in_progress' ? 'andamento' : 'fechado'}
                     </span>
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-600">{ticket.time}</td>
+                  <td className="px-6 py-4 text-sm text-gray-600">{formatTimeAgo(ticket.created_at)}</td>
                 </tr>
               ))}
             </tbody>
