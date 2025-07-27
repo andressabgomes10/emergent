@@ -1,0 +1,451 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 0.5rem;
+  /* Cores da marca Cajá */
+  --caja-orange: #FF6B35;
+  --caja-orange-dark: #E55A2B;
+  --caja-white: #FFFFFF;
+  --caja-gray-light: #F8F9FA;
+  --caja-gray-dark: #343A40;
+  --caja-gray-medium: #6C757D;
+  
+  /* Cores de estado */
+  --success: #28A745;
+  --error: #DC3545;
+  --warning: #FFC107;
+  --info: #17A2B8;
+  
+  /* Variáveis do sistema baseadas na marca Cajá */
+  --background: oklch(1 0 0); /* #FFFFFF */
+  --foreground: oklch(0.22 0 0); /* #343A40 */
+  --card: oklch(1 0 0); /* #FFFFFF */
+  --card-foreground: oklch(0.22 0 0); /* #343A40 */
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0 0);
+  --primary: oklch(0.65 0.15 35); /* #FF6B35 */
+  --primary-foreground: oklch(1 0 0); /* #FFFFFF */
+  --secondary: oklch(0.975 0 0); /* #F8F9FA */
+  --secondary-foreground: oklch(0.22 0 0); /* #343A40 */
+  --muted: oklch(0.975 0 0); /* #F8F9FA */
+  --muted-foreground: oklch(0.45 0 0); /* #6C757D */
+  --accent: oklch(0.65 0.15 35); /* #FF6B35 */
+  --accent-foreground: oklch(1 0 0);
+  --destructive: oklch(0.55 0.2 25); /* #DC3545 */
+  --border: oklch(0.9 0 0); /* Cinza claro para bordas */
+  --input: oklch(0.9 0 0);
+  --ring: oklch(0.65 0.15 35); /* #FF6B35 para foco */
+  --chart-1: oklch(0.65 0.15 35);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(1 0 0); /* #FFFFFF */
+  --sidebar-foreground: oklch(0.22 0 0); /* #343A40 */
+  --sidebar-primary: oklch(0.65 0.15 35); /* #FF6B35 */
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.975 0 0); /* #F8F9FA */
+  --sidebar-accent-foreground: oklch(0.22 0 0);
+  --sidebar-border: oklch(0.9 0 0);
+  --sidebar-ring: oklch(0.65 0.15 35);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+
+/* Estilos customizados para o sistema Cajá Atendimento */
+@layer components {
+  /* Tipografia */
+  .font-inter {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  }
+  
+  /* Layout principal */
+  .caja-layout {
+    display: grid;
+    grid-template-areas: 
+      "sidebar header"
+      "sidebar main";
+    grid-template-columns: 64px 1fr;
+    grid-template-rows: 60px 1fr;
+    min-height: 100vh;
+  }
+  
+  /* Sidebar */
+  .caja-sidebar {
+    grid-area: sidebar;
+    background: var(--caja-white);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 64px;
+    z-index: 50;
+  }
+  
+  .caja-sidebar-logo {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .caja-sidebar-nav {
+    flex: 1;
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .caja-sidebar-item {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    color: var(--caja-gray-medium);
+    transition: all 200ms ease-in-out;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .caja-sidebar-item:hover {
+    background: var(--caja-gray-light);
+    color: var(--caja-orange);
+  }
+  
+  .caja-sidebar-item.active {
+    color: var(--caja-orange);
+    background: var(--caja-gray-light);
+  }
+  
+  .caja-sidebar-item.active::before {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 24px;
+    background: var(--caja-orange);
+    border-radius: 0 2px 2px 0;
+  }
+  
+  .caja-sidebar-user {
+    padding: 1rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  /* Header */
+  .caja-header {
+    grid-area: header;
+    background: var(--caja-white);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    position: fixed;
+    top: 0;
+    left: 64px;
+    right: 0;
+    height: 60px;
+    z-index: 40;
+  }
+  
+  .caja-header-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--caja-gray-dark);
+  }
+  
+  .caja-header-info {
+    font-size: 0.875rem;
+    color: var(--caja-gray-medium);
+  }
+  
+  .caja-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  /* Área principal */
+  .caja-main {
+    grid-area: main;
+    margin-left: 64px;
+    margin-top: 60px;
+    padding: 2rem;
+    background: var(--caja-gray-light);
+    min-height: calc(100vh - 60px);
+  }
+  
+  /* Botões */
+  .btn-caja-primary {
+    background: var(--caja-orange);
+    color: var(--caja-white);
+    border: none;
+    border-radius: 6px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  
+  .btn-caja-primary:hover {
+    background: var(--caja-orange-dark);
+    transform: scale(1.02);
+  }
+  
+  .btn-caja-secondary {
+    background: transparent;
+    color: var(--caja-orange);
+    border: 1px solid var(--caja-orange);
+    border-radius: 6px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  
+  .btn-caja-secondary:hover {
+    background: var(--caja-orange);
+    color: var(--caja-white);
+    transform: scale(1.02);
+  }
+  
+  .btn-caja-tertiary {
+    background: transparent;
+    color: var(--caja-orange);
+    border: none;
+    border-radius: 6px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  
+  .btn-caja-tertiary:hover {
+    background: var(--caja-gray-light);
+    transform: scale(1.02);
+  }
+  
+  /* Tamanhos de botão */
+  .btn-sm {
+    height: 32px;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+  
+  .btn-md {
+    height: 40px;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+  }
+  
+  .btn-lg {
+    height: 48px;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+  }
+  
+  /* Cards */
+  .caja-card {
+    background: var(--caja-white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    transition: all 200ms ease-in-out;
+  }
+  
+  .caja-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  /* Inputs */
+  .caja-input {
+    width: 100%;
+    height: 40px;
+    padding: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--caja-white);
+    color: var(--caja-gray-dark);
+    font-size: 0.875rem;
+    transition: all 200ms ease-in-out;
+  }
+  
+  .caja-input:focus {
+    outline: none;
+    border-color: var(--caja-orange);
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+  }
+  
+  .caja-input::placeholder {
+    color: var(--caja-gray-medium);
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .caja-layout {
+      grid-template-areas: 
+        "header"
+        "main";
+      grid-template-columns: 1fr;
+      grid-template-rows: 60px 1fr;
+    }
+    
+    .caja-sidebar {
+      transform: translateX(-100%);
+      transition: transform 200ms ease-in-out;
+    }
+    
+    .caja-sidebar.open {
+      transform: translateX(0);
+    }
+    
+    .caja-header {
+      left: 0;
+    }
+    
+    .caja-main {
+      margin-left: 0;
+    }
+  }
+  
+  /* Tooltip */
+  .tooltip {
+    position: relative;
+  }
+  
+  .tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: var(--caja-gray-dark);
+    color: var(--caja-white);
+    font-size: 0.75rem;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms ease-in-out;
+    z-index: 100;
+  }
+  
+  .tooltip:hover::after {
+    opacity: 1;
+  }
+}
+
