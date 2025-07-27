@@ -10,15 +10,18 @@ const WhatsAppIntegration = () => {
   const [message, setMessage] = useState('');
   const [user, setUser] = useState(null);
 
-  const WHATSAPP_SERVICE_URL = process.env.REACT_APP_BACKEND_URL?.replace('/api', ':3002') || 'http://localhost:3002';
-
   // Verificar status da conexão
   const checkStatus = async () => {
     try {
-      const response = await axios.get(`${WHATSAPP_SERVICE_URL}/status`);
-      setStatus(response.data.status);
-      setUser(response.data.user);
-      return response.data.connected;
+      const { data, error } = await whatsappService.getStatus();
+      if (error) {
+        console.error('Erro ao verificar status:', error);
+        setStatus('error');
+        return false;
+      }
+      setStatus(data.status);
+      setUser(data.user);
+      return data.connected;
     } catch (error) {
       console.error('Erro ao verificar status:', error);
       setStatus('error');
@@ -29,9 +32,14 @@ const WhatsAppIntegration = () => {
   // Buscar QR Code
   const fetchQR = async () => {
     try {
-      const response = await axios.get(`${WHATSAPP_SERVICE_URL}/qr`);
-      if (response.data.qr) {
-        setQrCode(response.data.qr);
+      const { data, error } = await whatsappService.getQR();
+      if (error) {
+        console.error('Erro ao buscar QR:', error);
+        setQrCode(null);
+        return;
+      }
+      if (data?.qr) {
+        setQrCode(data.qr);
       } else {
         setQrCode(null);
       }
