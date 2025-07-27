@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import QRCode from 'qrcode-react';
-import axios from 'axios';
+import { whatsappService } from '../services/whatsappService';
 
 const WhatsAppIntegration = () => {
   const [qrCode, setQrCode] = useState(null);
