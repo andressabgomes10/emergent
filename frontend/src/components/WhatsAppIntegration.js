@@ -74,16 +74,18 @@ const WhatsAppIntegration = () => {
 
     setLoading(true);
     try {
-      const response = await axios.post(`${WHATSAPP_SERVICE_URL}/send`, {
-        phoneNumber: phoneNumber.replace(/\D/g, ''), // Remove formatação
-        message
-      });
+      const { data, error } = await whatsappService.sendMessage(phoneNumber, message);
 
-      if (response.data.success) {
+      if (error) {
+        alert('Erro ao enviar mensagem: ' + error);
+        return;
+      }
+
+      if (data?.success) {
         alert('Mensagem enviada com sucesso!');
         setMessage('');
       } else {
-        alert('Erro ao enviar mensagem: ' + response.data.error);
+        alert('Erro ao enviar mensagem: ' + (data?.error || 'Erro desconhecido'));
       }
     } catch (error) {
       console.error('Erro ao enviar mensagem:', error);
