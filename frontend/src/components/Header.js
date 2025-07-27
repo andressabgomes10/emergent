@@ -2,6 +2,17 @@ import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 
 const Header = () => {
+  const { user, signOut } = useAuth();
+  const [showUserMenu, setShowUserMenu] = useState(false);
+
+  const handleLogout = async () => {
+    await signOut();
+    setShowUserMenu(false);
+  };
+
+  const getUserInitials = (email) => {
+    return email ? email.substring(0, 2).toUpperCase() : 'AD';
+  };
   return (
     <header className="glass-card border-b border-white/20 px-6 py-4">
       <div className="flex items-center justify-between">
