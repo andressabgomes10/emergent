@@ -13,13 +13,27 @@ const Header = () => {
   const getUserInitials = (email) => {
     return email ? email.substring(0, 2).toUpperCase() : 'AD';
   };
+  
   return (
     <header className="glass-card border-b border-white/20 px-6 py-4">
       <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-4">
-          <div className="hidden md:block">
-            <h2 className="text-2xl font-bold text-gray-800">Bem-vindo ao AtendePro</h2>
-            <p className="text-gray-600">Gerencie seus atendimentos de forma inteligente</p>
+        <div className="flex items-center space-x-6">
+          {/* Logo e Nome da Empresa */}
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
+              <span className="text-white font-bold text-lg">C</span>
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold text-gray-800">Cajá Atendimento</h1>
+            </div>
+          </div>
+          
+          {/* Informações Institucionais */}
+          <div className="hidden lg:block border-l border-gray-300 pl-6">
+            <div className="text-sm text-gray-600">
+              <p className="font-medium">Rua das Cajazeiras, 123 - Centro, São Paulo - SP</p>
+              <p>CNPJ: 12.345.678/0001-90</p>
+            </div>
           </div>
         </div>
 
@@ -50,7 +64,7 @@ const Header = () => {
               onClick={() => setShowUserMenu(!showUserMenu)}
               className="flex items-center space-x-2 bg-white/30 backdrop-blur-sm rounded-xl px-3 py-2 border border-white/20 hover:bg-white/40 transition-colors"
             >
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-br from-amber-500 to-orange-600 rounded-full flex items-center justify-center">
                 <span className="text-white font-semibold text-sm">{getUserInitials(user?.email)}</span>
               </div>
               <span className="hidden md:block text-gray-700 font-medium">{user?.email?.split('@')[0]}</span>
