@@ -62,72 +62,84 @@ const Sidebar = () => {
   };
 
   return (
-    <div className={`${isCollapsed ? 'w-16' : 'w-64'} min-h-screen glass-card border-r border-white/20 transition-all duration-300 ease-in-out slide-in-left`}>
-      <div className="p-6 border-b border-white/10">
-        <div className="flex items-center justify-between">
-          <div className={`flex items-center space-x-3 ${isCollapsed ? 'hidden' : 'block'}`}>
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center">
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364" />
-              </svg>
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-gray-800">AtendePro</h1>
-              <p className="text-sm text-gray-500">Sistema de Gestão</p>
-            </div>
-          </div>
-          <button
-            onClick={() => setIsCollapsed(!isCollapsed)}
-            className="p-2 rounded-lg hover:bg-white/20 transition-colors"
-          >
-            <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
-            </svg>
-          </button>
+    <div className="w-16 min-h-screen glass-card border-r border-white/20 transition-all duration-300 ease-in-out slide-in-left relative">
+      {/* Logo Cajá */}
+      <div className="p-4 border-b border-white/10 flex justify-center">
+        <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
+          <span className="text-white font-bold text-lg">C</span>
         </div>
       </div>
 
-      <nav className="p-4 space-y-2">
+      {/* Menu Items */}
+      <nav className="p-2 space-y-1 mt-4">
         {menuItems.map((item) => {
           const isActive = location.pathname === item.path;
           return (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={`flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 group ${
-                isActive
-                  ? 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg'
-                  : 'text-gray-600 hover:bg-white/30 hover:text-gray-800'
-              }`}
-            >
-              <span className={`flex-shrink-0 ${isActive ? 'text-white' : 'text-gray-500 group-hover:text-gray-700'}`}>
-                {item.icon}
-              </span>
-              {!isCollapsed && (
-                <span className="font-medium">
-                  {item.name}
+            <div key={item.path} className="relative">
+              <Link
+                to={item.path}
+                onMouseEnter={() => setHoveredItem(item.name)}
+                onMouseLeave={() => setHoveredItem(null)}
+                className={`flex items-center justify-center w-12 h-12 rounded-xl transition-all duration-200 group relative ${
+                  isActive
+                    ? 'bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-lg border-l-4 border-orange-400'
+                    : 'text-gray-600 hover:bg-white/30 hover:text-gray-800'
+                }`}
+              >
+                <span className={`flex-shrink-0 ${isActive ? 'text-white' : 'text-gray-500 group-hover:text-gray-700'}`}>
+                  {item.icon}
                 </span>
+              </Link>
+              
+              {/* Tooltip */}
+              {hoveredItem === item.name && (
+                <div className="absolute left-16 top-1/2 transform -translate-y-1/2 z-50 ml-2">
+                  <div className="bg-gray-900 text-white px-3 py-2 rounded-lg text-sm font-medium shadow-lg whitespace-nowrap">
+                    {item.name}
+                    <div className="absolute top-1/2 left-0 transform -translate-y-1/2 -translate-x-1 w-2 h-2 bg-gray-900 rotate-45"></div>
+                  </div>
+                </div>
               )}
-            </Link>
+            </div>
           );
         })}
       </nav>
 
-      {!isCollapsed && (
-        <div className="absolute bottom-6 left-4 right-4">
-          <div className="glass-card p-4 rounded-xl border border-white/20">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-blue-500 rounded-full flex items-center justify-center">
-                <span className="text-white font-semibold text-sm">AD</span>
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-gray-800">Admin</p>
-                <p className="text-xs text-gray-500">admin@atendepro.com</p>
-              </div>
+      {/* User Section */}
+      <div className="absolute bottom-4 left-2 right-2">
+        <div className="space-y-2">
+          {/* User Avatar */}
+          <div className="flex justify-center">
+            <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-blue-500 rounded-full flex items-center justify-center cursor-pointer">
+              <span className="text-white font-semibold text-sm">
+                {user?.email ? user.email.substring(0, 2).toUpperCase() : 'AD'}
+              </span>
             </div>
           </div>
+          
+          {/* Logout Button */}
+          <button
+            onClick={handleLogout}
+            onMouseEnter={() => setHoveredItem('Sair')}
+            onMouseLeave={() => setHoveredItem(null)}
+            className="w-12 h-12 bg-red-500/20 hover:bg-red-500/30 rounded-xl flex items-center justify-center transition-colors relative mx-auto"
+          >
+            <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
+            
+            {/* Logout Tooltip */}
+            {hoveredItem === 'Sair' && (
+              <div className="absolute left-16 top-1/2 transform -translate-y-1/2 z-50 ml-2">
+                <div className="bg-gray-900 text-white px-3 py-2 rounded-lg text-sm font-medium shadow-lg whitespace-nowrap">
+                  Sair
+                  <div className="absolute top-1/2 left-0 transform -translate-y-1/2 -translate-x-1 w-2 h-2 bg-gray-900 rotate-45"></div>
+                </div>
+              </div>
+            )}
+          </button>
         </div>
-      )}
+      </div>
     </div>
   );
 };
