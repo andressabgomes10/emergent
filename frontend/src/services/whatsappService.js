@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const WHATSAPP_SERVICE_URL = 'http://localhost:3002';
+const WHATSAPP_SERVICE_URL = 'https://4420134b-e876-4cbb-a37a-af96d2ddba3c.preview.emergentagent.com:3002';
 
 export const whatsappService = {
   // Verificar status da conexão
