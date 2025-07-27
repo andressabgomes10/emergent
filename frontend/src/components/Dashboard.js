@@ -2,10 +2,65 @@ import React, { useState, useEffect } from 'react';
 import { stats, tickets as ticketService, realtime } from '../lib/supabase';
 
 const Dashboard = () => {
+  const [dashboardStats, setDashboardStats] = useState({
+    ticketsOpen: 0,
+    ticketsProgress: 0,
+    ticketsClosed: 0,
+    clientsTotal: 0
+  });
+  const [recentTickets, setRecentTickets] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Carregar dados iniciais
+  useEffect(() => {
+    loadDashboardData();
+    
+    // Setup real-time subscription para tickets
+    const subscription = realtime.subscribeToTickets(() => {
+      console.log('Ticket atualizado - recarregando dados...');
+      loadDashboardData();
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  const loadDashboardData = async () => {
+    try {
+      // Carregar estatísticas
+      const statsData = await stats.getDashboardStats();
+      setDashboardStats(statsData);
+
+      // Carregar tickets recentes (últimos 5)
+      const { data: ticketsData, error } = await ticketService.getAll();
+      if (error) {
+        console.error('Erro ao carregar tickets:', error);
+      } else {
+        setRecentTickets(ticketsData?.slice(0, 5) || []);
+      }
+    } catch (error) {
+      console.error('Erro ao carregar dados do dashboard:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const formatTimeAgo = (dateString) => {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffInMinutes = Math.floor((now - date) / (1000 * 60));
+    
+    if (diffInMinutes < 1) return 'agora';
+    if (diffInMinutes < 60) return `${diffInMinutes} min`;
+    if (diffInMinutes < 1440) return `${Math.floor(diffInMinutes / 60)} horas`;
+    return `${Math.floor(diffInMinutes / 1440)} dias`;
+  };
+
   const statsCards = [
     {
       title: 'Tickets Abertos',
-      value: '24',
+      value: dashboardStats.ticketsOpen.toString(),
       change: '+12%',
       isPositive: false,
       icon: (
@@ -17,7 +72,7 @@ const Dashboard = () => {
     },
     {
       title: 'Em Andamento',
-      value: '18',
+      value: dashboardStats.ticketsProgress.toString(),
       change: '+8%',
       isPositive: true,
       icon: (
@@ -28,8 +83,8 @@ const Dashboard = () => {
       bgColor: 'from-yellow-400 to-orange-500'
     },
     {
-      title: 'Resolvidos Hoje',
-      value: '42',
+      title: 'Resolvidos',
+      value: dashboardStats.ticketsClosed.toString(),
       change: '+24%',
       isPositive: true,
       icon: (
@@ -40,26 +95,29 @@ const Dashboard = () => {
       bgColor: 'from-green-400 to-green-600'
     },
     {
-      title: 'Tempo Médio',
-      value: '2.4h',
+      title: 'Total Clientes',
+      value: dashboardStats.clientsTotal.toString(),
       change: '-15%',
       isPositive: true,
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
         </svg>
       ),
       bgColor: 'from-blue-400 to-blue-600'
     }
   ];
 
-  const recentTickets = [
-    { id: '#001', client: 'João Silva', subject: 'Problema com login', priority: 'alta', status: 'aberto', time: '2 min' },
-    { id: '#002', client: 'Maria Santos', subject: 'Dúvida sobre faturamento', priority: 'média', status: 'andamento', time: '15 min' },
-    { id: '#003', client: 'Pedro Costa', subject: 'Solicitação de recurso', priority: 'baixa', status: 'fechado', time: '1 hora' },
-    { id: '#004', client: 'Ana Lima', subject: 'Bug na aplicação', priority: 'urgente', status: 'aberto', time: '5 min' },
-    { id: '#005', client: 'Carlos Dias', subject: 'Configuração de conta', priority: 'média', status: 'andamento', time: '30 min' }
-  ];
+  if (loading) {
+    return (
+      <div className="space-y-6 fade-in-up">
+        <div className="glass-card rounded-2xl p-8 border border-white/20 animate-pulse">
+          <div className="h-8 bg-gray-200 rounded mb-4"></div>
+          <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6 fade-in-up">
