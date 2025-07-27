@@ -1,14 +1,27 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Dashboard from './components/Dashboard';
 import TicketManagement from './components/TicketManagement';
 import ClientManagement from './components/ClientManagement';
 import UserManagement from './components/UserManagement';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
+import LoginForm from './components/LoginForm';
+import LoadingSpinner from './components/LoadingSpinner';
 import './App.css';
 
-function App() {
+const AppContent = () => {
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+
+  if (!user) {
+    return <LoginForm />;
+  }
+
   return (
     <Router>
       <div className="flex min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
@@ -26,6 +39,14 @@ function App() {
         </div>
       </div>
     </Router>
+  );
+};
+
+function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   );
 }
 
