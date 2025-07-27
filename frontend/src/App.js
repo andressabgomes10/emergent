@@ -5,6 +5,7 @@ import Dashboard from './components/Dashboard';
 import TicketManagement from './components/TicketManagement';
 import ClientManagement from './components/ClientManagement';
 import UserManagement from './components/UserManagement';
+import WhatsAppIntegration from './components/WhatsAppIntegration';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import LoginForm from './components/LoginForm';
