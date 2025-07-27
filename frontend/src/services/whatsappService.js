@@ -1,6 +1,9 @@
 import axios from 'axios';
 
-const WHATSAPP_SERVICE_URL = 'https://4420134b-e876-4cbb-a37a-af96d2ddba3c.preview.emergentagent.com:3002';
+// Use o mesmo host do backend, mas na porta 3002
+const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8000';
+const whatsappUrl = backendUrl.replace(':8000', ':3002').replace('/api', '');
+const WHATSAPP_SERVICE_URL = whatsappUrl;
 
 export const whatsappService = {
   // Verificar status da conexão
