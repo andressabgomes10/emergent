@@ -10,7 +10,7 @@ const WhatsAppIntegration = () => {
   const [message, setMessage] = useState('');
   const [user, setUser] = useState(null);
 
-  const WHATSAPP_SERVICE_URL = 'http://localhost:3002';
+  const WHATSAPP_SERVICE_URL = process.env.REACT_APP_BACKEND_URL?.replace('/api', ':3002') || 'http://localhost:3002';
 
   // Verificar status da conexão
   const checkStatus = async () => {
