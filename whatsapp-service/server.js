@@ -9,7 +9,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const FRONTEND_URL = process.env.FRONTEND_URL || 'https://4420134b-e876-4cbb-a37a-af96d2ddba3c.preview.emergentagent.com';
+const FRONTEND_URL = process.env.FRONTEND_URL || 'https://8268fa90-0814-46da-bc67-8e025a4c33ac.preview.emergentagent.com';
 const SUPABASE_URL = 'https://whfmtlavhmalfsdetfsy.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndoZm10bGF2aG1hbGZzZGV0ZnN5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM2NDEwMjYsImV4cCI6MjA2OTIxNzAyNn0.KCCHHy3FgnsveExLYWpI8qJMmrHTYFwkkJmQ2H_M-cw';
 
