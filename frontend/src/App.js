@@ -35,6 +35,7 @@ const AppContent = () => {
               <Route path="/tickets" element={<TicketManagement />} />
               <Route path="/clients" element={<ClientManagement />} />
               <Route path="/users" element={<UserManagement />} />
+              <Route path="/whatsapp" element={<WhatsAppIntegration />} />
             </Routes>
           </main>
         </div>
