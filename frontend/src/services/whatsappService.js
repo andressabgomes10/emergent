@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-// Use o mesmo host do backend, mas na porta 3002
+// Use o mesmo host do backend, mas na porta 8002 (WhatsApp service)
 const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8000';
-const whatsappUrl = backendUrl.replace(':8000', ':3002').replace('/api', '');
+const whatsappUrl = backendUrl.replace('/api', ':8002');
 const WHATSAPP_SERVICE_URL = whatsappUrl;
 
 export const whatsappService = {
