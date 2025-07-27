@@ -25,7 +25,7 @@ const AppContent = () => {
 
   return (
     <Router>
-      <div className="flex min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+      <div className="flex min-h-screen bg-gradient-to-br from-yellow-50 via-amber-50 to-orange-100">
         <Sidebar />
         <div className="flex-1 flex flex-col">
           <Header />
