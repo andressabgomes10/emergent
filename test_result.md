@@ -14,7 +14,7 @@
 # Main and testing agents must follow this exact format to maintain testing data. 
 # The testing data must be entered in yaml format Below is the data structure:
 # 
-## user_problem_statement: {problem_statement}
+## user_problem_statement: "Desenvolva uma interface minimalista, funcional e responsiva para o sistema Cajá Atendimento, com foco em usabilidade e organização visual limpa. A navegação deve ser fluida, com destaque para uma sidebar compacta e um header corporativo profissional."
 ## backend:
 ##   - task: "Task name"
 ##     implemented: true
